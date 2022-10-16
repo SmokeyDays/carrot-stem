@@ -21,13 +21,13 @@ export class MainPage extends React.Component<MainPageProps, {}> {
         <img src={logo} className="main-logo" alt="logo"></img>
         <div className="main-btn-list">
           <div className = "main-btn" id = "switch-family" onClick={() => this.props.setPage("FamilyPage")}>
-              <img src = {familySvg} className = "icon-logo" alt = "family"/>
+              <img src = {familySvg} className = "main-btn-icon" alt = "family"/>
             </div>
             <div className = "main-btn" id = "switch-muster" onClick={() => this.props.setPage("MusterPage")}>
-              <img src = {musterSvg} className = "icon-logo" alt = "muster"/>
+              <img src = {musterSvg} className = "main-btn-icon" alt = "muster"/>
             </div>
             <div className = "main-btn" id = "switch-ballot" onClick={() => this.props.setPage("BallotPage")}>
-              <img src = {ballotSvg} className = "icon-logo" alt = "ballot"/>
+              <img src = {ballotSvg} className = "main-btn-icon" alt = "ballot"/>
             </div>
         </div>
       </div>

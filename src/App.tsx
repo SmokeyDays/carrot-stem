@@ -31,13 +31,13 @@ class App extends React.Component<{}, AppState> {
         return <MainPage setPage = {this.setPage.bind(this)}/>
       }
       case "FamilyPage": {
-        return <FamilyPage/>
+        return <FamilyPage setPage = {this.setPage.bind(this)}/>
       }
       case "MusterPage": {
-        return <MusterPage/>
+        return <MusterPage setPage = {this.setPage.bind(this)}/>
       }
       case "BallotPage": {
-        return <BallotPage/>
+        return <BallotPage setPage = {this.setPage.bind(this)}/>
       }
       default: {
         return <ErrorPage message = "Error: Page Not Found"/>
