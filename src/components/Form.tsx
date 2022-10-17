@@ -5,14 +5,13 @@ export interface FormState {
 }
 
 export interface FormProps {
-  formName: string,
   buttonName: string,
   formVariables: Record<string,string>
   formClassName: string,
   formButtonOnClick: (info: Record<string,string>) => void
 }
 
-export class BasicInfoForm extends React.Component<FormProps,FormState> {
+export class InfoForm extends React.Component<FormProps,FormState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -43,7 +42,7 @@ export class BasicInfoForm extends React.Component<FormProps,FormState> {
     const inputs = [];
     for(const i in val) {
       inputs.push(<input
-        className= 'basic-info-input'
+        className= {this.props.formClassName + "-input"}
         name = {i}
         type = "text"
         value = {val[i]}
@@ -54,14 +53,13 @@ export class BasicInfoForm extends React.Component<FormProps,FormState> {
 
   render() {
     return (
-      <div>
-        <form className="basic-info-form">
+      <div className={this.props.formClassName + "-form-box"}>
+        <form className={this.props.formClassName + "-form"}>
           <label>
-            {this.props.formName}
             {this.inputGenerator(this.state.value)}
           </label>
         </form>
-        <div className="basic-info-button" onClick={this.buttonClick}>{this.props.buttonName}</div>
+        <div className={this.props.formClassName + "-submit-btn"} onClick={this.buttonClick}>{this.props.buttonName}</div>
       </div>
     );
   }

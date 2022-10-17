@@ -23,8 +23,24 @@
 }
 
 .member-table-td {
+  text-align: center;
   padding: .2em;
   font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
   color: #282c34;
   font-size: 1.1em;
+}
+
+.td-edit-form-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-edit-input {
+  width: 8em;
+}
+
+.td-edit-submit-btn {
+  margin: 2px;
 }

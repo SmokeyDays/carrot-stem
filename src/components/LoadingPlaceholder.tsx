@@ -1,6 +1,5 @@
 import React from "react"
 import loadingSvg from "../assets/icons/loading.svg"
-import { FamilyMember, FamilyMembers } from "../regulates/interfaces"
 import "./LoadingPlaceholder.css"
 
 export interface LoadingProps {
