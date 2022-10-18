@@ -42,5 +42,10 @@
 }
 
 .td-edit-submit-btn {
+  cursor: pointer;
   margin: 2px;
+}
+
+.member-table-tr-display {
+  cursor: pointer;
 }

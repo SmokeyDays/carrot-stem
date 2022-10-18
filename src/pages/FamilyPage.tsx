@@ -23,7 +23,7 @@ class MiniMemberTd extends React.Component<MiniMemberTdProps, MiniMemberTdStates
     }
   }
   render(): React.ReactNode {
-    let container: ReactNode = <div onClick={() => this.setState({editing: true})}>{this.props.val === ""? "+": this.props.val}</div>
+    let container: ReactNode = <div className = "member-table-tr-display" onClick={() => this.setState({editing: true})}>{this.props.val === ""? "+": this.props.val}</div>
     if(this.state.editing) {
       container = <InfoForm
         buttonName="确认"
