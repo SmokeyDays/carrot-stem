@@ -34,30 +34,47 @@
   font-size: 1.1em;
 }
 
-.td-edit-form-box {
+.member-table-edit-form-box {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.td-edit-input {
+.member-table-edit-input {
   width: 8em;
 }
 
-.td-edit-submit-btn {
+.member-table-edit-submit-btn {
   cursor: pointer;
   font-size: 1.1em;
   margin: 2px;
 }
 
-.member-table-tr-display {
+.member-table-display {
   cursor: pointer;
 }
 
 .add-member-box {
   color: #282c34;
   font-size: 1.5em;
+}
+
+.add-member-edit-form-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-member-edit-input {
+  width: 8em;
+}
+
+.add-member-edit-submit-btn {
+  cursor: pointer;
+  font-size: 1.1em;
+  margin: 2px;
 }
 
 .submit-btn-icon {

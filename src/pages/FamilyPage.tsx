@@ -1,45 +1,11 @@
 import React, { ReactNode } from "react";
 import { ActionPage } from "../components/ActionPage";
-import { InfoForm } from "../components/Form";
+import { EditableForm, InfoForm } from "../components/Form";
 import { LoadingPlaceholder } from "../components/LoadingPlaceholder";
 import { FamilyMember, FamilyMembers } from "../regulates/interfaces";
 import submitSvg from "../assets/icons/submit.svg"
 
 import "./FamilyPage.css"
-
-interface MiniMemberTdProps {
-  val: string,
-  submit: (val: string) => void
-  editable: boolean,
-}
-
-interface MiniMemberTdStates {
-  editing: boolean,
-}
-
-class MiniMemberTd extends React.Component<MiniMemberTdProps, MiniMemberTdStates> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      editing: false,
-    }
-  }
-  render(): React.ReactNode {
-    let container: ReactNode = <div className = "member-table-tr-display" onClick={() => this.setState({editing: true})}>{(this.props.val === "" && this.props.editable)? "+": this.props.val}</div>
-    if(this.state.editing && this.props.editable) {
-      container = <InfoForm
-        buttonName="确认"
-        formVariables={{val: this.props.val}}
-        formClassName = {"td-edit"}
-        formButtonOnClick = {((info: Record<string, string>) => {
-          this.props.submit(info.val);
-          this.setState({editing: false})
-        })}
-      />
-    }
-    return container;
-  }
-}
 
 interface MiniMemberTrProps {
   info: FamilyMember,
@@ -67,7 +33,7 @@ class MiniMemberTr extends React.Component<MiniMemberTrProps, {}> {
       const key = baseKey as keyof FamilyMember;
       tdList.push(
           <td className = "member-table-td">
-            <MiniMemberTd editable = {key !== "student_id"} submit={this.getModifier(key)} val = {info[key].toString()}/>
+            <EditableForm formClassName="member-table" editable = {key !== "student_id"} submit={this.getModifier(key)} val = {info[key].toString()}/>
           </td>
         );
     }
@@ -191,7 +157,7 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
           {trList}
         </table>,
         <div className="add-member-box">
-          <MiniMemberTd editable = {true} submit={(val: string) => {
+          <EditableForm formClassName="add-member" editable = {true} submit={(val: string) => {
             this.addMember(val);
           }} val = {""}/>
         </div>,

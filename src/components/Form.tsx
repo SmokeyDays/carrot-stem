@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export interface FormState {
   value: Record<string,string>;
@@ -62,5 +62,46 @@ export class InfoForm extends React.Component<FormProps,FormState> {
         <div className={this.props.formClassName + "-submit-btn"} onClick={this.buttonClick}>{this.props.buttonName}</div>
       </div>
     );
+  }
+}
+
+
+interface EditableFormProps {
+  val: string,
+  formClassName: string,
+  submit: (val: string) => void
+  editable: boolean,
+}
+
+interface EditableFormStates {
+  editing: boolean,
+}
+
+export class EditableForm extends React.Component<EditableFormProps, EditableFormStates> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      editing: false,
+    }
+  }
+  render(): React.ReactNode {
+    let container: ReactNode = <div
+      className = {this.props.formClassName + "-display"}
+      onClick={() => this.setState({editing: true})}
+    >
+      {(this.props.val === "" && this.props.editable)? "+": this.props.val}
+    </div>;
+    if(this.state.editing && this.props.editable) {
+      container = <InfoForm
+        buttonName="确认"
+        formVariables={{val: this.props.val}}
+        formClassName = {this.props.formClassName + "-edit"}
+        formButtonOnClick = {((info: Record<string, string>) => {
+          this.props.submit(info.val);
+          this.setState({editing: false})
+        })}
+      />
+    }
+    return container;
   }
 }
