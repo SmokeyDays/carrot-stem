@@ -9,6 +9,7 @@ import "./FamilyPage.css"
 interface MiniMemberTdProps {
   val: string,
   submit: (val: string) => void
+  editable: boolean,
 }
 
 interface MiniMemberTdStates {
@@ -24,7 +25,7 @@ class MiniMemberTd extends React.Component<MiniMemberTdProps, MiniMemberTdStates
   }
   render(): React.ReactNode {
     let container: ReactNode = <div className = "member-table-tr-display" onClick={() => this.setState({editing: true})}>{this.props.val === ""? "+": this.props.val}</div>
-    if(this.state.editing) {
+    if(this.state.editing && this.props.editable) {
       container = <InfoForm
         buttonName="确认"
         formVariables={{val: this.props.val}}
@@ -68,7 +69,7 @@ class MiniMemberTr extends React.Component<MiniMemberTrProps, {}> {
     const tdList: Array<ReactNode> = [];
     for(const baseKey in info) {
       const key = baseKey as keyof FamilyMember;
-      tdList.push(<MiniMemberTd submit={this.getModifier(key)} val = {info[key].toString()}/>)
+      tdList.push(<MiniMemberTd editable = {key !== "student_id"} submit={this.getModifier(key)} val = {info[key].toString()}/>)
     }
     return (
       <tr className="mini-member-card member-table-tr">
