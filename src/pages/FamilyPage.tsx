@@ -3,6 +3,7 @@ import { ActionPage } from "../components/ActionPage";
 import { InfoForm } from "../components/Form";
 import { LoadingPlaceholder } from "../components/LoadingPlaceholder";
 import { FamilyMember, FamilyMembers } from "../regulates/interfaces";
+import submitSvg from "../assets/icons/submit.svg"
 
 import "./FamilyPage.css"
 
@@ -24,7 +25,7 @@ class MiniMemberTd extends React.Component<MiniMemberTdProps, MiniMemberTdStates
     }
   }
   render(): React.ReactNode {
-    let container: ReactNode = <div className = "member-table-tr-display" onClick={() => this.setState({editing: true})}>{this.props.val === ""? "+": this.props.val}</div>
+    let container: ReactNode = <div className = "member-table-tr-display" onClick={() => this.setState({editing: true})}>{(this.props.val === "" && this.props.editable)? "+": this.props.val}</div>
     if(this.state.editing && this.props.editable) {
       container = <InfoForm
         buttonName="确认"
@@ -36,11 +37,7 @@ class MiniMemberTd extends React.Component<MiniMemberTdProps, MiniMemberTdStates
         })}
       />
     }
-    return (
-      <td className = "member-table-td">
-        {container}
-      </td>
-    );
+    return container;
   }
 }
 
@@ -60,7 +57,6 @@ class MiniMemberTr extends React.Component<MiniMemberTrProps, {}> {
       } else {
         member[key] = val;
       }
-      console.log(member);
       this.props.modify(member);
     }
   }
@@ -69,7 +65,11 @@ class MiniMemberTr extends React.Component<MiniMemberTrProps, {}> {
     const tdList: Array<ReactNode> = [];
     for(const baseKey in info) {
       const key = baseKey as keyof FamilyMember;
-      tdList.push(<MiniMemberTd editable = {key !== "student_id"} submit={this.getModifier(key)} val = {info[key].toString()}/>)
+      tdList.push(
+          <td className = "member-table-td">
+            <MiniMemberTd editable = {key !== "student_id"} submit={this.getModifier(key)} val = {info[key].toString()}/>
+          </td>
+        );
     }
     return (
       <tr className="mini-member-card member-table-tr">
@@ -137,6 +137,24 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
     this.changedMembers.add(id);
   }
 
+  addMember(studentID: string) {
+    const member = {
+      "student_id": studentID, //string,主键,不可为空
+      "name": "卡洛塔", //string,不可为空（视为主键，但没有验证）
+      "qq": 123456, //int64,不可为空（视为主键，但没有验证）
+      "phone": "12345612345", //string
+      "mail": "carrot@qq.com", //string
+      "address": "相亲相爱一家人", //string
+      "birthday": "19260817"
+    }
+    const members = this.state.members;
+    this.changedMembers.add(members.length);
+    members.push(member);
+    this.setState({
+      members: members
+    });
+  }
+
   submitChange() {
     this.changedMembers.forEach((id: number) => {
       const member = this.state.members[id];
@@ -144,6 +162,7 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
       // 上交更改
     })
     this.changedMembers.clear();
+    this.renewMembers();
   }
 
   render() {
@@ -166,12 +185,18 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
           </tr>
         </thead>
       );
-      container = (
-        <table>
+      container = [
+        <table className="member-table">
           {thead}
           {trList}
-        </table>
-      )
+        </table>,
+        <div className="add-member-box">
+          <MiniMemberTd editable = {true} submit={(val: string) => {
+            this.addMember(val);
+          }} val = {""}/>
+        </div>,
+        <img src = {submitSvg} className="submit-btn submit-btn-icon" alt = "submit" onClick = {this.submitChange.bind(this)}></img>
+      ]
     }
     return (
       <ActionPage onClickReturn={() => this.props.setPage("MainPage")}>
