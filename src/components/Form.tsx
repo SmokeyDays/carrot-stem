@@ -89,7 +89,7 @@ export class EditableForm extends React.Component<EditableFormProps, EditableFor
       className = {this.props.formClassName + "-display"}
       onClick={() => this.setState({editing: true})}
     >
-      {(this.props.val === "" && this.props.editable)? "+": this.props.val}
+      {(this.props.val === "" && this.props.editable)? "＋": this.props.val}
     </div>;
     if(this.state.editing && this.props.editable) {
       container = <InfoForm

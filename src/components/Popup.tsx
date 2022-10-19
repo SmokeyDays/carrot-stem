@@ -32,8 +32,8 @@ export class PopupWindow extends Component<PopupWindowProps,{}> {
 
 // It's bad to use "any", but I don't exactly know what to use.
 export interface PopupBtnProps {
-  btnComponent: any,
-  windowComponent: any,
+  btnComponent: ReactNode,
+  windowComponent: ReactNode,
 }
 
 export interface PopupBtnState {

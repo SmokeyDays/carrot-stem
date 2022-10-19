@@ -6,6 +6,7 @@ import { FamilyMember, FamilyMembers } from "../regulates/interfaces";
 import submitSvg from "../assets/icons/submit.svg"
 
 import "./FamilyPage.css"
+import { Connection } from "../utils/connection";
 
 interface MiniMemberTrProps {
   info: FamilyMember,
@@ -52,7 +53,7 @@ const exampleMember: FamilyMember = {
 	"phone": "12345612345", //string
 	"mail": "carrot@qq.com", //string
 	"address": "相亲相爱一家人", //string
-	"birthday": ""
+	"birthday": "2050-12-31T00:00:00Z"
 }
 
 const exampleMember2: FamilyMember = {
@@ -62,7 +63,7 @@ const exampleMember2: FamilyMember = {
 	"phone": "12345612345", //string
 	"mail": "carrot@qq.com", //string
 	"address": "相亲相爱一家人", //string
-	"birthday": ""
+	"birthday": "2050-12-31T00:00:00Z"
 }
 
 
@@ -78,11 +79,13 @@ export interface FamilyPageStates {
 
 export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageStates> {
   changedMembers: Set<number> = new Set();
+  addMembers: Set<number> = new Set();
 
   async getMemberList(): Promise<FamilyMembers> {
     return new Promise((resolve,reject)=>{
 			setTimeout(()=>{
-				resolve(exampleMemberList);
+				resolve(Connection.getInstance().getFamily() as unknown as FamilyMembers);
+        // resolve(exampleMemberList);
 			},100)
 		})
   }
@@ -111,23 +114,27 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
       "phone": "12345612345", //string
       "mail": "carrot@qq.com", //string
       "address": "相亲相爱一家人", //string
-      "birthday": "19260817"
+      "birthday": "2050-12-31T00:00:00Z"
     }
     const members = this.state.members;
-    this.changedMembers.add(members.length);
+    this.addMembers.add(members.length);
     members.push(member);
     this.setState({
       members: members
     });
   }
 
-  submitChange() {
-    this.changedMembers.forEach((id: number) => {
-      const member = this.state.members[id];
-      console.log(member);
+  async submitChange() {
+    await this.changedMembers.forEach((id: number) => {
+      console.log(id);
+      Connection.getInstance().changeMember(this.state.members[id]);
+    })
+    await this.addMembers.forEach((id: number) => {
+      Connection.getInstance().addMember(this.state.members[id]);
       // 上交更改
     })
     this.changedMembers.clear();
+    this.addMembers.clear();
     this.renewMembers();
   }
 

@@ -9,3 +9,13 @@ export interface FamilyMember {
 }
 
 export type FamilyMembers = Array<FamilyMember>;
+
+export interface MusterPerson {
+	name: string,
+	qq: number,
+}
+
+export interface Muster {
+	title: string,
+	people: Array<MusterPerson>
+}
