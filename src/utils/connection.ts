@@ -82,8 +82,8 @@ const exampleMuster3: Muster = {
 const musterList = [exampleMuster1, exampleMuster2, exampleMuster3];
 
 export class Connection {
-  serverURL = "http://106.52.43.175:3456/api";
-  token = "nsOd";
+  serverURL = "http://106.52.43.175:3487/api";
+  token = "carrot";
   // Singleton
   private static instance: Connection;
   private constructor() { }
@@ -94,84 +94,98 @@ export class Connection {
     return this.instance;
   }
 
-  getMusterList() {
-    return musterList;
-  }
-
-  changeMusterPerson(title: string, name: string, del: boolean) {
-    if (!del) {
-      for(const i of musterList) {
-        if(i.title === title) {
-          for(let j = 0; j < i.people.length; ++j) {
-            if(i.people[j].name === name) {
-              i.people.splice(j, 1);
-              break;
-            }
-          }
-        }
-      }
-    } else {
-      for(const i of musterList) {
-        if(i.title === title) {
-          i.people.push({
-            name: name,
-            qq: 114514,
-          })
-        }
-      }
-    }
-  }
-  
-  changeMusterPeople(title: string, names: string[], del: boolean) {
-    for(const i of names) {
-      this.changeMusterPerson(title, i, del);
-    }
-  }
-
-  changeMuster(title: string, del: boolean) {
-    if(del) {
-      
-    } else {
-      musterList.push({
-        title: title,
-        people: [],
-      });
-    }
-  }
 
   async getFamily() {
     const res = await fetch(this.serverURL + "/family/all?token=" + this.token, {
       "headers": {},
       "body": null,
       "method": "GET",
-      mode: "no-cors",
     });
-    console.log(res);
     const json = await res.json();
-    console.log(json.text());
-    return json.text();
+    return json.data;
   }
 
   async addMember(member: FamilyMember) {
     const res = await fetch(this.serverURL + "/family?token=" + this.token, {
       "headers": {
-        "Access-Control-Allow-Origin": "*",
       },
       "body": JSON.stringify(member),
       "method": "POST",
-      mode: "no-cors",
     });
-    console.log(res);
+    const json = await res.json();
+    console.log(json.data);
   }
-  async changeMember(member: FamilyMember) {
-    const res = await fetch(this.serverURL + "/family?student_id=" + member.student_id + "?token=" + this.token, {
+
+  async delMember(member: FamilyMember) {
+    const res = await fetch(this.serverURL + "/family?student_id=" + member.student_id + "&token=" + this.token, {
       "headers": {
-        "Access-Control-Allow-Origin": "*",
+      },
+      "body": null,
+      "method": "DELETE",
+    });
+    const json = await res.json();
+    console.log(json.data);
+  }
+
+  async changeMember(member: FamilyMember) {
+    const res = await fetch(this.serverURL + "/family?student_id=" + member.student_id + "&token=" + this.token, {
+      "headers": {
       },
       "body": JSON.stringify(member),
       "method": "PUT",
-      mode: "no-cors",
     });
-    console.log(res);
+    const json = await res.json();
+    console.log(json.data);
   }
+
+  async getMusterList() {
+    const res = await fetch(this.serverURL + "/muster/all?token=" + this.token, {
+      "headers": {},
+      "body": null,
+      "method": "GET",
+    });
+    const json = await res.json();
+    console.log(json.data);
+    if(json.data == null) {
+      return [];
+    }
+    return json.data;
+  }
+  
+  async changeMusterPeople(title: string, names: string[], del: boolean) {
+    if(del) {
+      console.log("del");
+    } else {
+      const res = await fetch(this.serverURL + "/muster/people?title=" + title + "&token=" + this.token, {
+        "headers": {},
+        "body": JSON.stringify({
+          name: names
+        }),
+        "method": "POST",
+      });
+      const json = await res.json();
+      console.log(json.data);
+    }
+  }
+
+  async changeMuster(title: string, del: boolean) {
+    if(del) {
+      const res = await fetch(this.serverURL + "/muster?title=" + title + "&token=" + this.token, {
+        "headers": {},
+        "body": null,
+        "method": "DELETE",
+      });
+      const json = await res.json();
+      console.log(json.data);
+    } else {
+      const res = await fetch(this.serverURL + "/muster?title=" + title + "&token=" + this.token, {
+        "headers": {},
+        "body": null,
+        "method": "POST",
+      });
+      const json = await res.json();
+      console.log(json.data);
+    }
+  }
+
 }

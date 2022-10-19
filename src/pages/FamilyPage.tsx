@@ -7,10 +7,12 @@ import submitSvg from "../assets/icons/submit.svg"
 
 import "./FamilyPage.css"
 import { Connection } from "../utils/connection";
+import { PopupBtn } from "../components/Popup";
 
 interface MiniMemberTrProps {
   info: FamilyMember,
-  modify: (member: FamilyMember) => void
+  modify: (member: FamilyMember) => void,
+  delthis: () => void,
 }
 
 const MemberKeyList = ["student_id", "name", "qq", "phone", "mail", "address", "birthday"];
@@ -40,34 +42,28 @@ class MiniMemberTr extends React.Component<MiniMemberTrProps, {}> {
     }
     return (
       <tr className="mini-member-card member-table-tr">
+        <td>
+          <PopupBtn btnComponent={
+              <div className="member-del-btn">
+                ✖
+              </div> 
+            } windowComponent={
+              <div className="member-del-popup">
+                <div className="member-del-popup-desc">
+                  是否删除？此操作将不可撤回！
+                  删除前将自动提交其他更改！
+                </div>
+                <div className="member-del-popup-submit" onClick = {this.props.delthis}>
+                  确定
+                </div>
+              </div>
+            }/>
+        </td>
         {tdList}
       </tr>
     )
   }
 }
-
-const exampleMember: FamilyMember = {
-  "student_id": "U202100000", //string,主键,不可为空
-	"name": "卡洛塔", //string,不可为空（视为主键，但没有验证）
-	"qq": 123456, //int64,不可为空（视为主键，但没有验证）
-	"phone": "12345612345", //string
-	"mail": "carrot@qq.com", //string
-	"address": "相亲相爱一家人", //string
-	"birthday": "2050-12-31T00:00:00Z"
-}
-
-const exampleMember2: FamilyMember = {
-  "student_id": "U202100001", //string,主键,不可为空
-	"name": "卡洛塔", //string,不可为空（视为主键，但没有验证）
-	"qq": 123456, //int64,不可为空（视为主键，但没有验证）
-	"phone": "12345612345", //string
-	"mail": "carrot@qq.com", //string
-	"address": "相亲相爱一家人", //string
-	"birthday": "2050-12-31T00:00:00Z"
-}
-
-
-const exampleMemberList = [exampleMember, exampleMember2];
 
 export interface FamilyPageProps {
   setPage: (val: string) => void,
@@ -147,13 +143,19 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
         return <MiniMemberTr
           modify={((member: FamilyMember) => {
             this.modifyMember(member, id);
-          })} info = {member}
+          })}
+          delthis = {async () => {
+            await this.submitChange();
+            await Connection.getInstance().delMember(member);
+          }}
+          info = {member}
         />
       });
       const tagList = MemberKeyList.map((val: string) => <td className="member-table-th">{val}</td>);
       const thead = (
         <thead className = "member-table-head">
           <tr>
+            <td></td>
             {tagList}
           </tr>
         </thead>
@@ -161,7 +163,9 @@ export class FamilyPage extends React.Component<FamilyPageProps, FamilyPageState
       container = [
         <table className="member-table">
           {thead}
-          {trList}
+          <tbody>
+            {trList}
+          </tbody>
         </table>,
         <div className="add-member-box">
           <EditableForm formClassName="add-member" editable = {true} submit={(val: string) => {

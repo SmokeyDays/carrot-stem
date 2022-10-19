@@ -25,3 +25,24 @@
   align-items: center;
   justify-content: center;
 }
+
+.action-return-popup {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-return-popup-submit {
+  margin: 20px;
+  padding: 5px;
+  font-size: 1.5em;
+	text-align: center;
+	color: #08ffea;
+	user-select: none;
+
+	border: 2px solid #08ffea;
+	border-radius: 5px;
+	background-color: #1f1f1f;
+}

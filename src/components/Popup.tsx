@@ -1,6 +1,6 @@
 import React from "react";
 import { Component, ReactNode } from "react";
-import './Composition.css';
+import './Popup.css';
 
 export interface PopupWindowProps {
   popupCloseOnClick: () => void,
