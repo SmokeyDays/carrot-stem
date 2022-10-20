@@ -9,7 +9,9 @@ export interface BallotPageProps {
 export class BallotPage extends React.Component<BallotPageProps, {}> {
   render() {
     return (
-      <ActionPage onClickReturn={() => this.props.setPage("MainPage")}/>
+      <ActionPage onClickReturn={() => this.props.setPage("MainPage")}>
+        
+      </ActionPage>
     );
   }
 }
