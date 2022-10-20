@@ -14,7 +14,8 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
     - name: Install and Build
       run: | # 该步骤要运行的命令，这里就是部署react 的命令
         npm install
-        npm run-script build
+        export CI=false     
+        npm run build
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3 # 执行一些公开的action
       with:
