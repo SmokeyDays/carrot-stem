@@ -1,7 +1,6 @@
 .action-page {
   background-color: #66BAB7;
   min-height: 100vh;
-  font-size: calc(16px + vmin);
   color: white;
 }
 
