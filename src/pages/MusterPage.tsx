@@ -3,7 +3,7 @@ import { ActionPage } from "../components/ActionPage";
 import { EditableForm } from "../components/Form";
 import { LoadingPlaceholder } from "../components/LoadingPlaceholder";
 import { PopupBtn } from "../components/Popup";
-import { Muster, MusterPerson } from "../regulates/interfaces";
+import { Muster, PersonWithQQ } from "../regulates/interfaces";
 import { Connection } from "../utils/connection";
 
 import "./MusterPage.css"
@@ -16,7 +16,7 @@ interface MusterBoxProps {
 
 class MusterBox extends React.Component<MusterBoxProps, {}> {
   render() {
-    const peopleList = this.props.info.people?.map((val: MusterPerson) => {
+    const peopleList = this.props.info.people?.map((val: PersonWithQQ) => {
       return <div className="muster-person-display" onClick={() => {
         this.props.change(val.name, true);
       }}>{val.name}</div>;

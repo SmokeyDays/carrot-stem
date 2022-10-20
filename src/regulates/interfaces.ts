@@ -10,12 +10,24 @@ export interface FamilyMember {
 
 export type FamilyMembers = Array<FamilyMember>;
 
-export interface MusterPerson {
+export interface PersonWithQQ {
 	name: string,
 	qq: number,
 }
 
+export interface BallotPerson {
+	people: PersonWithQQ,
+	answered_flag: boolean,
+	answer: string,
+}
+
 export interface Muster {
 	title: string,
-	people: Array<MusterPerson>
+	people: Array<PersonWithQQ>
+}
+
+export interface Ballot {
+	title: string,
+	remark: string,
+	target_member: Array<BallotPerson>
 }
