@@ -15,9 +15,8 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
       run: | # 该步骤要运行的命令，这里就是部署react 的命令
         npm install
         npm run build
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3 # 执行一些公开的action
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        ACCESS_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }} # 这里是我们刚刚创建密钥的变量名称
-        BRANCH: gh-pages
-        FOLDER: build
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_dir: ./build
