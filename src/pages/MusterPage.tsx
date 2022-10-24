@@ -39,7 +39,7 @@ class MusterBox extends React.Component<MusterBoxProps, {}> {
             </div>
           }/>
           <div className="muster-title-desc">
-            {this.props.info.title}
+            {this.props.info.title + "(" + (this.props.info.people === null? 0: this.props.info.people.length) + ")"}
           </div>
         </div>
         <div className="muster-people-list">
@@ -91,7 +91,7 @@ export class MusterPage extends React.Component<MusterPageProps, MusterPageState
   }
   
   render() {
-    let container: ReactNode = <LoadingPlaceholder text = "名单加载中..."/>
+    let container: ReactNode = <LoadingPlaceholder text = "名单加载中..."/>;
     if(this.state?.musters === undefined) {
       this.renewMusters();
     } else {
@@ -102,14 +102,15 @@ export class MusterPage extends React.Component<MusterPageProps, MusterPageState
           this.changeMusterPerson(id, name, del);
         }}/>;
       })
-      container = <div className="muster-list">
+      container = (
+      <div className="muster-list">
         {musterList}
         <div className="add-muster">
           <EditableForm val={""} formClassName={"add-muster"} submit={(val: string) => {
             this.changeMuster(val, false);
           } } editable={true} />
         </div>
-      </div>;
+      </div>);
     }
     return (
       <ActionPage onClickReturn={() => this.props.setPage("MainPage")}>

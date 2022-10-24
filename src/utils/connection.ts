@@ -154,7 +154,15 @@ export class Connection {
   
   async changeMusterPeople(title: string, names: string[], del: boolean) {
     if(del) {
-      console.log("del");
+      const res = await fetch(this.serverURL + "/muster/people?title=" + title + "&token=" + this.token, {
+        "headers": {},
+        "body": JSON.stringify({
+          name: names
+        }),
+        "method": "DELETE",
+      });
+      const json = await res.json();
+      console.log(json.data);
     } else {
       const res = await fetch(this.serverURL + "/muster/people?title=" + title + "&token=" + this.token, {
         "headers": {},
@@ -188,4 +196,58 @@ export class Connection {
     }
   }
 
+  async getBallotList() {
+    const res = await fetch(this.serverURL + "/ballot/all?token=" + this.token, {
+      "headers": {},
+      "body": null,
+      "method": "GET",
+    });
+    const json = await res.json();
+    return json.data;
+  }
+
+  async addBallot(title: string, muster: string, remark: string) {
+    const res = await fetch(this.serverURL + "/ballot?title=" + title + "&muster=" + muster + "&remark=" + remark + "&token=" + this.token, {
+      "headers": {
+      },
+      "body": null,
+      "method": "POST",
+    });
+    const json = await res.json();
+    console.log(json.data);
+  }
+
+  async updateAnswer(title: string, name: string, answer: string) {
+    const res = await fetch(this.serverURL + "/ballot/member?title=" + title + "&answer=" + answer + "&name=" + name + "&token=" + this.token, {
+      "headers": {
+      },
+      "body": null,
+      "method": "PUT",
+    });
+    const json = await res.json();
+    console.log(json.data);
+    return json.data;
+  }
+
+  async deleteBallot(title: string) {
+    const res = await fetch(this.serverURL + "/ballot?title=" + title + "&token=" + this.token, {
+      "headers": {
+      },
+      "body": null,
+      "method": "DELETE",
+    });
+    const json = await res.json();
+    console.log(json.data);
+  }
+
+  async sendBroadcast(title: string, message: string) {
+    const res = await fetch(this.serverURL + "/ballot/member/broadcast?title=" + title + "&message=" + message + "&token=" + this.token, {
+      "headers": {
+      },
+      "body": null,
+      "method": "POST",
+    });
+    const json = await res.json();
+    console.log(json.data);
+  }
 }

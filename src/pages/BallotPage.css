@@ -1,0 +1,144 @@
+.ballot-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.ballot-card {
+  width: 350px; 
+  padding: 5px;
+  margin: 10px;
+  
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+  box-shadow: 3px 3px rgb(0 0 0 / 60%);
+
+  margin: .2em;
+  font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  color: #282c34;
+  font-size: 1.3em;
+  font-weight: bold;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.ballot-add-label, .ballot-add-form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ballot-add-input {
+  margin: 2px;
+}
+
+.ballot-add-submit-btn {
+  width: 4em;
+
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+}
+
+/********** Ballot Detail **********/
+
+.ballot-detail {
+  width: 350px; 
+  padding: 10px;
+
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+  box-shadow: 3px 3px rgb(0 0 0 / 60%);
+}
+
+.ballot-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.refresh-icon, .return-list-icon, .delete-icon {
+  margin: 3px;
+
+  width: 30px;
+  height: 30px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: #282c34;
+  border-radius: 0.5em;
+
+  cursor: pointer;
+}
+
+.ballot-detail-title {
+  margin: .2em;
+  font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  color: #282c34;
+  font-size: 1.3em;
+  font-weight: bold;
+  box-shadow: 0px 1px 0 0 rgb(34 36 38 / 60%);
+}
+
+.ballot-states-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.ballot-one-state {
+  color: #282c34;
+  font-weight: bold;
+  margin: 2px;
+  padding: 0 2px 2px 2px;
+
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+}
+
+.ballot-people-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ballot-detail-remark {
+  margin: .2em;
+  font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  color: #282c34;
+  font-size: 1em;
+}
+
+.people-table-head {
+  font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  text-align: center;
+  margin: 5px;
+  color: #282c34;
+  font-size: 1.2em;
+  font-weight: bold;
+  box-shadow: 0px 1px 0 0 rgb(34 36 38 / 60%);
+}
+
+.people-table-th {
+  padding: .1em .5em;
+}
+
+.people-table-tr {
+  box-shadow: 0px 1px 0 0 rgb(34 36 38 / 15%);
+}
+
+.people-table-td {
+  text-align: center;
+  padding: .2em;
+  font-family: 'Open Sans', 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  color: #282c34;
+  font-size: 0.9em;
+}

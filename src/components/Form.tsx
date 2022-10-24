@@ -55,7 +55,7 @@ export class InfoForm extends React.Component<FormProps,FormState> {
     return (
       <div className={this.props.formClassName + "-form-box"}>
         <form className={this.props.formClassName + "-form"}>
-          <label>
+          <label className={this.props.formClassName + "-label"}>
             {this.inputGenerator(this.state.value)}
           </label>
         </form>
@@ -71,6 +71,7 @@ interface EditableFormProps {
   formClassName: string,
   submit: (val: string) => void
   editable: boolean,
+  children?: React.ReactNode
 }
 
 interface EditableFormStates {
@@ -89,7 +90,9 @@ export class EditableForm extends React.Component<EditableFormProps, EditableFor
       className = {this.props.formClassName + "-display"}
       onClick={() => this.setState({editing: true})}
     >
-      {(this.props.val === "" && this.props.editable)? "＋": this.props.val}
+      {this.props.children === undefined
+        ? (this.props.val === "" && this.props.editable)? "＋": this.props.val
+        : this.props.children}
     </div>;
     if(this.state.editing && this.props.editable) {
       container = <InfoForm
