@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/carrot.png"
+import logo from "../assets/carrot512.png"
 import ballotSvg from "../assets/icons/ballot.svg"
 import familySvg from "../assets/icons/family.svg"
 import musterSvg from "../assets/icons/muster.svg"
