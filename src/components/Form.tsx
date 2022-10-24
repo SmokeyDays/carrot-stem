@@ -46,7 +46,8 @@ export class InfoForm extends React.Component<FormProps,FormState> {
         name = {i}
         type = "text"
         value = {val[i]}
-        onChange={this.handleInputChange}/>);
+        onChange={this.handleInputChange}
+        />);
     }
     return inputs;
   }
@@ -54,7 +55,13 @@ export class InfoForm extends React.Component<FormProps,FormState> {
   render() {
     return (
       <div className={this.props.formClassName + "-form-box"}>
-        <form className={this.props.formClassName + "-form"}>
+        <form className={this.props.formClassName + "-form"} onKeyDown = {
+          (event) => {
+            if(event.key === "Enter") {
+              this.buttonClick();
+            }
+          }
+        }>
           <label className={this.props.formClassName + "-label"}>
             {this.inputGenerator(this.state.value)}
           </label>

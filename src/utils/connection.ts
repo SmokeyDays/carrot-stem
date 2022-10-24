@@ -83,7 +83,7 @@ const musterList = [exampleMuster1, exampleMuster2, exampleMuster3];
 
 export class Connection {
   serverURL = "http://106.52.43.175:3487/api";
-  token = "carrot";
+  private token = "myCuteCarrot!!!";
   // Singleton
   private static instance: Connection;
   private constructor() { }
@@ -94,6 +94,9 @@ export class Connection {
     return this.instance;
   }
 
+  setToken(val: string) {
+    this.token = val;
+  }
 
   async getFamily() {
     const res = await fetch(this.serverURL + "/family/all?token=" + this.token, {

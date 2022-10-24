@@ -69,7 +69,7 @@ class BallotDetail extends React.Component<BallotDetailProps, BallotDetailStates
           </td>
           <td className="people-table-td" id = {"col-" + id}>
             <EditableForm
-              formClassName="member-table"
+              formClassName="people-table"
               editable = {true}
               submit={(ans: string) => {
                 this.updateAnswer(ballot.title, val.people.name, ans);

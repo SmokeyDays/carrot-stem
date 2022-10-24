@@ -142,3 +142,51 @@
   color: #282c34;
   font-size: 0.9em;
 }
+
+.ballot-refresh-edit-form-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ballot-refresh-edit-input {
+  width: 6em;
+}
+
+.ballot-refresh-edit-submit-btn {
+  color: #282c34;
+  margin: 2px;
+  padding: 0 2px;
+  cursor: pointer;
+  font-size: 1.1em;
+
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+}
+
+.people-table-edit-form-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.people-table-edit-input {
+  width: 5em;
+}
+
+.people-table-edit-submit-btn {
+  color: #282c34;
+  margin: 2px;
+  padding: 0 2px;
+  cursor: pointer;
+  font-size: 1.1em;
+
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #282c34;
+}
