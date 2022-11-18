@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import returnSvg from "../assets/icons/return.svg"
 import "./ActionPage.css"
+import './BackgroundLayer.css';
 import { PopupBtn } from "./Popup";
 
 export interface ActionPageProps {
@@ -11,7 +12,7 @@ export interface ActionPageProps {
 export class ActionPage extends React.Component<ActionPageProps, {}> {
   render() {
     return (
-      <div className="action-page">
+      <div className="action-page background-layer">
         <div className="action-head">
           <PopupBtn btnComponent={
             <img src = {returnSvg} className="return-btn action-btn-icon" alt = "return"></img>

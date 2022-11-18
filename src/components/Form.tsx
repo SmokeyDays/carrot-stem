@@ -7,6 +7,7 @@ export interface FormState {
 export interface FormProps {
   buttonName: string,
   formVariables: Record<string,string>
+  specialType?: Record<string, string>
   formClassName: string,
   formButtonOnClick: (info: Record<string,string>) => void
 }
@@ -44,7 +45,7 @@ export class InfoForm extends React.Component<FormProps,FormState> {
       inputs.push(<input
         className= {this.props.formClassName + "-input"}
         name = {i}
-        type = "text"
+        type = {this.props.specialType === undefined || this.props.specialType[i] === undefined? "text": this.props.specialType[i] }
         value = {val[i]}
         onChange={this.handleInputChange}
         />);
@@ -78,6 +79,7 @@ interface EditableFormProps {
   formClassName: string,
   submit: (val: string) => void
   editable: boolean,
+  inputType?: string,
   children?: React.ReactNode
 }
 
@@ -105,6 +107,7 @@ export class EditableForm extends React.Component<EditableFormProps, EditableFor
       container = <InfoForm
         buttonName="确认"
         formVariables={{val: this.props.val}}
+        specialType={this.props.inputType === undefined? {}: {val: this.props.inputType}}
         formClassName = {this.props.formClassName + "-edit"}
         formButtonOnClick = {((info: Record<string, string>) => {
           this.props.submit(info.val);

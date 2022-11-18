@@ -13,8 +13,8 @@
   height: 50vmin;
   width: 50vmin;
   border-radius: 2em;
-  /* border-color: chartreuse;
-  border-style: solid; */
+  border-color: chartreuse;
+  border-style: solid;
   pointer-events: none;
 }
 
@@ -30,10 +30,12 @@
 .main-btn {
   margin: 0px 40px;
   padding: 0.1em 0.2em;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #282c34;
-  border-radius: 0.5em;
+  border-radius: .5em;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.main-btn:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .main-btn-icon {

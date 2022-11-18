@@ -7,6 +7,7 @@ import loginSvg from "../assets/icons/token.svg"
 import { EditableForm } from "../components/Form";
 import { Connection } from "../utils/connection";
 import './MainPage.css';
+import '../components/BackgroundLayer.css';
 
 export interface MainPageProps {
   setPage: (id: string) => void,
@@ -20,7 +21,7 @@ export class MainPage extends React.Component<MainPageProps, {}> {
 
   render() {
     return (
-      <div className="main-page">
+      <div className="main-page background-layer">
         <img src={logo} className="main-logo" alt="logo"></img>
         <div className="main-btn-list">
           <div className = "main-btn" id = "switch-family" onClick={() => this.props.setPage("FamilyPage")}>
@@ -35,8 +36,10 @@ export class MainPage extends React.Component<MainPageProps, {}> {
             <div className = "main-btn" id = "login-token">
               <EditableForm
                 formClassName="login"
+                inputType="password"
                 editable = {true}
                 submit={(val: string) => {
+                  console.log(val);
                   Connection.getInstance().setToken(val);
                 }}
               val = {""}>
